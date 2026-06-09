@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos Arce</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES DE DISEÑO PREMIUM --- */
+        :root {
+            --primary: #7052ff;
+            --primary-hover: #583ee3;
+            --accent: #ff4757;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* --- HEADER ESTILO HERO --- */
+        header {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: rgba(112, 82, 255, 0.15);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.05em;
+        }
+
+        header p {
+            color: #c7d2fe;
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* --- CONTENEDOR --- */
+        .container {
+            max-width: 1000px;
+            margin: -2rem auto 4rem auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- TARJETAS --- */
+        .card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title span {
+            background: rgba(112, 82, 255, 0.1);
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        /* --- ZONA DE CATÁLOGOS --- */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .catalog-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .catalog-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 20px -5px rgba(112, 82, 255, 0.1);
+            background: white;
+        }
+
+        .catalog-item h3 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
+        .catalog-item p { color: var(--text-muted); font-size: 0.95rem; margin: 0 0 1.5rem 0; }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-hover); }
+
+        .btn-pdf {
+            background: #ffe6e8;
+            color: #ff4757;
+            border: 2px dashed #ff4757;
+            width: 100%;
+            padding: 1.1rem;
+            font-size: 1.1rem;
+            box-sizing: border-box;
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .btn-pdf:hover { background: #ff4757; color: white; border-style: solid; }
+
+        /* BOTÓN ESTILO WHATSAPP */
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+            width: 100%;
+            font-size: 1.1rem;
+            padding: 1.1rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn-whatsapp:hover {
+            background: #20ba5a;
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
+        }
+
+        /* --- FORMULARIO ESTILIZADO --- */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .form-group { display: flex; flex-direction: column; }
+        .form-group.full-width { grid-column: span 2; }
+
+        label { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-main); }
+
+        input[type="text"], input[type="tel"], textarea {
+            font-family: inherit;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            background-color: #f8fafc;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(112, 82, 255, 0.1);
+        }
+
+        textarea { resize: vertical; min-height: 140px; }
+
+        .nota-recordatorio {
+            background-color: rgba(255, 71, 87, 0.08);
+            border-left: 4px solid var(--accent);
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            color: #d63031;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 3rem 1rem; }
+            header h1 { font-size: 2rem; }
+            .card { padding: 1.5rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Pedidos Arce</h1>
+        <p>Toda la moda de Carmel y el cuidado de Novaventa en un solo lugar. ¡Elige tus favoritos y haz tu pedido en minutos!</p>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+            <div class="card-title"><span>01</span> Revistas Disponibles</div>
+            
+            <div class="catalog-grid">
+                <div class="catalog-item">
+                    <div>
+                        <h3>✨ Catálogo Novaventa: Máss Prestigio</h3>
+                        <p>Explora lo mejor en maquillaje, cuidado facial y capilar, fragancias, accesorios y moda. ¡Incluye la sección exclusiva con los Favoritos de Anyeluz!</p>
+                    </div>
+                    <a href="https://catalogo.novaventa.com/novaventa/2026/prestigio/c10/prestigio-c10/" target="_blank" class="btn btn-primary">Ver Pantalla Completa</a>
+                </div>
+
+                <div class="catalog-item">
+                    <div>
+                        <h3>🏡 Catálogo Novaventa: Hogar & Estilo</h3>
+                        <p>Aprovecha los mejores descuentos en cuidado personal, salud y aseo. Además, encuentra soluciones e innovación para tu hogar y una despensa completamente surtida.</p>
+                    </div>
+                    <a href="https://catalogo.novaventa.com/novaventa/2026/tradicional/c10/helados-y-carnicos-c10/" target="_blank" class="btn btn-primary">Ver Pantalla Completa</a>
+                </div>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 2rem 0;">
+
+            <label style="margin-bottom: 0.2rem; display: block; font-weight: 700; font-size: 1.1rem;">🔥 Carmel: 29 Años de Pura Moda</label>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0 0 1.2rem 0;">Échale un vistazo rápido a la revista de aniversario. Casi tres décadas trayéndote los mejores looks, vestidos y outfits imperdibles.</p>
+            
+            <a href="https://drive.google.com/file/d/1iGx2NHAvfMRoNGIBJTzZv9nvAwH2Qy4P/view?usp=sharing" target="_blank" class="btn btn-pdf">
+                📄 Ver Catálogo Especial Carmel (PDF)
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-title"><span>02</span> Formulario de Pedido Directo</div>
+            
+            <form id="formPedido">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" placeholder="Ej. Valentina Mendoza" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono / WhatsApp</label>
+                        <input type="tel" id="telefono" placeholder="Ej. 315 765 4321" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="direccion">Dirección Completa de Entrega</label>
+                        <input type="text" id="direccion" placeholder="Calle 10 #24-32, Barrio El Prado" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="codigos">Códigos de los Productos</label>
+                        
+                        <div class="nota-recordatorio">
+                            ⚠️ <strong>Importante:</strong> Por favor, antes de enviar verifica haber anotado correctamente el <strong>código exacto</strong> del producto y la <strong>cantidad</strong> que deseas.
+                        </div>
+
+                        <textarea id="codigos" placeholder="Escribe aquí los códigos que viste en la revista. Por ejemplo:&#10;- Cód. 7421 (Labial) - Cantidad: 1&#10;- Cód. 0932 (Perfume) - Cantidad: 2" required></textarea>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button type="submit" class="btn btn-whatsapp">📱 Enviar Pedido por WhatsApp</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('formPedido').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 1. REEMPLAZA ESTE NÚMERO POR EL TUYO (Debe incluir el código de país, sin el + ni espacios)
+            const miNumeroWhatsApp = "+57 3054133170"; 
+
+            // 2. Capturar los datos ingresados por tu cliente
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const direccion = document.getElementById('direccion').value;
+            const codigos = document.getElementById('codigos').value;
+            
+            // 3. Crear el mensaje estructurado exactamente "en escalera"
+            const textoMensaje = `🛒 *NUEVO PEDIDO DE CATÁLOGO*\n\n` +
+                                 `👤 *Nombre:* ${nombre}\n` +
+                                 `📞 *Teléfono:* ${telefono}\n` +
+                                 `📍 *Dirección:* ${direccion}\n\n` +
+                                 `📋 *Productos solicitados:*\n${codigos}`;
+            
+            // 4. Codificar texto para que sea válido en la URL de WhatsApp
+            const textoCodificado = encodeURIComponent(textoMensaje);
+            
+            // 5. Crear enlace directo y redirigir
+            const urlFinal = `https://api.whatsapp.com/send?phone=${miNumeroWhatsApp}&text=${textoCodificado}`;
+            
+            window.open(urlFinal, '_blank');
+        });
+    </script>
+
+</body>
+</html>
